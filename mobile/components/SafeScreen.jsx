@@ -1,19 +1,20 @@
-import { View, StyleSheet } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import COLORS from '../constants/colors';
+import { View, StyleSheet } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import useThemeStore from "../store/themeStore";
 
 export default function SafeScreen({ children }) {
-    const insects = useSafeAreaInsets();
+    const insets = useSafeAreaInsets();
+    const { colors } = useThemeStore();
+
     return (
-        <View style={[styles.container, { paddingTop: insects.top }]}>
+        <View style={[styles.container, { paddingTop: insets.top, backgroundColor: colors.background }]}>
             {children}
         </View>
-    )
+    );
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: COLORS.background,
     },
-})
+});

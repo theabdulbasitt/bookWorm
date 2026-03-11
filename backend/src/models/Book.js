@@ -23,7 +23,7 @@ const bookSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
-        requried: true,
+        required: true,
     }
 }, { timestamps: true });
 

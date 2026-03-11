@@ -1,6 +1,7 @@
 import {
     Text,
     View,
+    Image,
     TextInput,
     TouchableOpacity,
     ActivityIndicator,
@@ -9,34 +10,33 @@ import {
     Alert,
 } from "react-native";
 import { Link, useRouter } from "expo-router";
-import { createStyles } from "../../assets/styles/signup.styles";
-import { Ionicons } from "@expo/vector-icons";
+import { createStyles } from "../../assets/styles/login.styles";
 import { useState, useMemo } from "react";
+import { Ionicons } from "@expo/vector-icons";
 import useThemeStore from "../../store/themeStore";
 import useAuthStore from "../../store/authStore";
 
-export default function Signup() {
+export default function Login() {
     const { colors } = useThemeStore();
     const styles = useMemo(() => createStyles(colors), [colors]);
 
-    const { register, isLoading } = useAuthStore();
+    const { login, isLoading } = useAuthStore();
     const router = useRouter();
 
-    const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
 
-    const handleSignup = async () => {
-        if (!username.trim() || !email.trim() || !password.trim()) {
+    const handleLogin = async () => {
+        if (!email.trim() || !password.trim()) {
             Alert.alert("Error", "Please fill in all fields");
             return;
         }
-        const result = await register(username.trim(), email.trim(), password);
+        const result = await login(email.trim(), password);
         if (result.success) {
             router.replace("/(tabs)/");
         } else {
-            Alert.alert("Registration Failed", result.error || "Something went wrong");
+            Alert.alert("Login Failed", result.error || "Something went wrong");
         }
     };
 
@@ -46,35 +46,17 @@ export default function Signup() {
             behavior={Platform.OS === "ios" ? "padding" : "height"}
         >
             <View style={styles.container}>
+                {/* ILLUSTRATION */}
+                <View style={styles.topIllustration}>
+                    <Image
+                        source={require("../../assets/images/im.png")}
+                        style={styles.illustrationImage}
+                        resizeMode="contain"
+                    />
+                </View>
+
                 <View style={styles.card}>
-                    {/* Header */}
-                    <View style={styles.header}>
-                        <Text style={styles.title}>BookWorm 🐛</Text>
-                        <Text style={styles.subtitle}>Share your favourite reads</Text>
-                    </View>
-
                     <View style={styles.formContainer}>
-                        {/* Username */}
-                        <View style={styles.inputGroup}>
-                            <Text style={styles.label}>Username</Text>
-                            <View style={styles.inputContainer}>
-                                <Ionicons
-                                    name="person-outline"
-                                    size={20}
-                                    color={colors.primary}
-                                    style={styles.inputIcon}
-                                />
-                                <TextInput
-                                    style={styles.input}
-                                    placeholder="Enter your username"
-                                    placeholderTextColor={colors.placeholderText}
-                                    value={username}
-                                    onChangeText={setUsername}
-                                    autoCapitalize="none"
-                                />
-                            </View>
-                        </View>
-
                         {/* Email */}
                         <View style={styles.inputGroup}>
                             <Text style={styles.label}>Email</Text>
@@ -128,25 +110,25 @@ export default function Signup() {
                             </View>
                         </View>
 
-                        {/* Signup button */}
+                        {/* Login button */}
                         <TouchableOpacity
                             style={styles.button}
-                            onPress={handleSignup}
+                            onPress={handleLogin}
                             disabled={isLoading}
                         >
                             {isLoading ? (
                                 <ActivityIndicator color={colors.white} />
                             ) : (
-                                <Text style={styles.buttonText}>Sign Up</Text>
+                                <Text style={styles.buttonText}>Login</Text>
                             )}
                         </TouchableOpacity>
 
                         {/* Footer */}
                         <View style={styles.footer}>
-                            <Text style={styles.footerText}>Already have an account?</Text>
-                            <Link href="/(auth)/login" asChild>
+                            <Text style={styles.footerText}>Don't have an account?</Text>
+                            <Link href="/(auth)/signup" asChild>
                                 <TouchableOpacity>
-                                    <Text style={styles.link}> Login</Text>
+                                    <Text style={styles.link}> Sign Up</Text>
                                 </TouchableOpacity>
                             </Link>
                         </View>

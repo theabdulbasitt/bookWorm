@@ -1,131 +1,77 @@
-import {
-    Text,
-    View,
-    Image,
-    TextInput,
-    TouchableOpacity,
-    ActivityIndicator,
-    KeyboardAvoidingView,
-    Platform
-} from 'react-native';
-import { Link } from "expo-router";
-import styles from '../../assets/styles/login.styles'
-import { useState } from 'react';
-import { Label } from '@react-navigation/elements';
+import { View, Text, TouchableOpacity, Linking, Image } from "react-native";
+import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import COLORS from '../../constants/colors';
+import { useMemo } from "react";
+import useThemeStore from "../../store/themeStore";
+import { THEMES } from "../../constants/colors";
+import { createStyles } from "../../assets/styles/landing.styles";
 
-export default function Login() {
+const THEME_OPTIONS = [
+  { name: "forest", emoji: "🌴" },
+  { name: "retro", emoji: "☕" },
+  { name: "ocean", emoji: "🌊" },
+  { name: "blossom", emoji: "🌸" },
+];
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [showPassword, setShowPassword] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
+export default function Landing() {
+  const { colors, themeName, setTheme } = useThemeStore();
+  const styles = useMemo(() => createStyles(colors), [colors]);
+  const router = useRouter();
 
-    const handleLogin = () => { }
+  const openLink = (url) => {
+    Linking.openURL(url);
+  };
 
-    return (
+  return (
+    <View style={styles.container}>
+      <View style={styles.logoContainer}>
+        <Text style={styles.title}>BookWorm 🐛</Text>
+        <Text style={styles.description}>
+          A vibrant community for book lovers. Connect, share your favorite reads, and discover new stories from around the world.
+        </Text>
+      </View>
 
-        <KeyboardAvoidingView
-            style={{ flex: 1 }}
-            behavior={Platform.OS === "ios" ? "padding" : "height"}
-        >
-            <View style={styles.container}>
-                {/* ILLUSTRATION */}
-                <View style={styles.topIllustration}>
-                    <Image
-                        source={require("../../assets/images/im.png")}
-                        style={styles.illustrationImage}
-                        resizeMode="contain"
-                    />
-                </View>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.loginBtn} onPress={() => router.push("/(auth)/login")}>
+          <Text style={styles.loginTxt}>Login</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.signupBtn} onPress={() => router.push("/(auth)/signup")}>
+          <Text style={styles.signupTxt}>Create Account</Text>
+        </TouchableOpacity>
+      </View>
 
-                <View style={styles.card}>
-                    <View style={styles.formContainer}>
-                        {/* Email */}
-                        <View style={styles.inputGroup}>
-                            <Text style={styles.label}>Email</Text>
-                            <View style={styles.inputContainer}>
-                                <Ionicons
-                                    name="mail-outline"
-                                    size={20}
-                                    color={COLORS.primary}
-                                    style={styles.inputIcon}
-                                />
-                                {/* Email Input */}
-                                <TextInput
-                                    style={styles.input}
-                                    placeholder='Enter your email'
-                                    placeholderTextColor={COLORS.placeholderText}
-                                    value={email}
-                                    onChangeText={setEmail}
-                                    keyboardType="email-address"
-                                    autoCapitalize="none"
-                                />
-                            </View>
-                        </View>
+      <Text style={styles.hireMeText}>Hire me ✨</Text>
 
-                        {/* password */}
-                        <View style={styles.inputGroup}>
-                            <Text style={styles.label}>Password</Text>
-                            <View style={styles.inputContainer}>
-                                {/* left icon */}
-                                <Ionicons
-                                    name="lock-closed-outline"
-                                    size={20}
-                                    color={COLORS.primary}
-                                    style={styles.inputIcon}
-                                />
-                                {/* password input */}
-                                <TextInput
-                                    style={styles.input}
-                                    placeholder="Enter your password"
-                                    placeholderTextColor={COLORS.placeholderText}
-                                    value={password}
-                                    onChangeText={setPassword}
-                                    secureTextEntry={!showPassword}
-                                />
-                                <TouchableOpacity
-                                    onPress={() => setShowPassword(!showPassword)}
-                                    style={styles.eyeIcon}
-                                >
-                                    <Ionicons
-                                        name={showPassword ? "eye-outline" : "eye-off-outline"}
-                                        size={20}
-                                        color={COLORS.primary}
-                                    />
+      <View style={styles.socialContainer}>
+        <TouchableOpacity style={styles.socialBtn} onPress={() => openLink("https://www.linkedin.com/in/theabdulbasitt/")}>
+          <Ionicons name="logo-linkedin" size={24} color={colors.primary} />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.socialBtn} onPress={() => openLink("https://github.com/theabdulbasitt")}>
+          <Ionicons name="logo-github" size={24} color={colors.primary} />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.socialBtn} onPress={() => openLink("https://www.upwork.com/freelancers/~01a8206f6bac357148")}>
+          <Text style={{ color: colors.primary, fontWeight: "900", fontSize: 16 }}>Up</Text>
+        </TouchableOpacity>
+      </View>
 
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-
-                        {/* login button  */}
-                        <TouchableOpacity
-                            style={styles.button}
-                            onPress={handleLogin}
-                            disabled={isLoading}
-                        >
-                            {isLoading ? (
-                                <ActivityIndicator color='#fff' />
-                            ) : (
-                                <Text style={styles.buttonText}>Login</Text>
-                            )}
-                        </TouchableOpacity>
-
-                        {/* footer */}
-                        <View style={styles.footer}>
-                            <Text style={styles.footerText}>Don't have an account?</Text>
-                            <Link href="/signup" asChild>
-                                <TouchableOpacity>
-                                    <Text style={styles.link}>Sign Up</Text>
-                                </TouchableOpacity>
-                            </Link>
-                        </View>
-
-                    </View>
-                </View>
-            </View>
-        </KeyboardAvoidingView>
-
-    )
+      <View style={styles.footer}>
+        <Text style={styles.themeLabel}>Choose your vibe</Text>
+        <View style={styles.themeRow}>
+          {THEME_OPTIONS.map((t) => (
+            <TouchableOpacity
+              key={t.name}
+              onPress={() => setTheme(t.name)}
+              style={[
+                styles.themeButton,
+                { backgroundColor: THEMES[t.name].primary },
+                themeName === t.name && styles.themeButtonActive,
+              ]}
+            >
+              <Text style={styles.themeEmoji}>{t.emoji}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+      </View>
+    </View>
+  );
 }
