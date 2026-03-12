@@ -68,12 +68,4 @@ eas build --platform android --profile production
 
 
 <img width="1024" height="1024" alt="Gemini_Generated_Image_mq0fsomq0fsomq0f" src="https://github.com/user-attachments/assets/3a0f39ea-b3a7-48db-8dea-fd4426c74e49" />
-![3](https://github.com/user-attachments/assets/48ef23b5-1a21-4563-816c-3fd76812070a)
-![2](https://github.com/user-attachments/assets/9156f6e6-343d-49b1-981e-8b588ca28afd)
-![1](https://github.com/user-attachments/assets/e0ddb104-ce17-44b9-9281-7ae7986ab939)
-![9](https://github.com/user-attachments/assets/1baba879-70e1-42df-8221-e29ec0d3306e)
-![8](https://github.com/user-attachments/assets/09ebd0b6-87b0-4622-a92d-3e0008442277)
-![7](https://github.com/user-attachments/assets/2fc36a65-96bb-407c-95e2-693bba358579)
-![6](https://github.com/user-attachments/assets/6d2d631a-0236-47e8-be6d-10e1770070bf)
-![5](https://github.com/user-attachments/assets/5ff43c15-a849-4daf-803d-84de2299f095)
-![4](https://github.com/user-attachments/assets/a918c01e-c5d5-46b8-bdd9-a39f4ac56971)
+
