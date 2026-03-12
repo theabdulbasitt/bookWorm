@@ -1,3 +1,9 @@
+<img width="1024" height="1024" alt="Gemini_Generated_Image_mq0fsomq0fsomq0f" src="https://github.com/user-attachments/assets/3a0f39ea-b3a7-48db-8dea-fd4426c74e49" />
+
+
+
+
+
 # BookWorm: AI-Powered Book Discovery App
 
 BookWorm is a full-stack mobile application that allows users to discover, search, and track their favorite books. It leverages a modern tech stack to provide a seamless cross-platform experience.
@@ -67,5 +73,4 @@ eas build --platform android --profile production
 *This project was developed as a showcase of Full-Stack Mobile Development capabilities using the React Native ecosystem.*
 
 
-<img width="1024" height="1024" alt="Gemini_Generated_Image_mq0fsomq0fsomq0f" src="https://github.com/user-attachments/assets/3a0f39ea-b3a7-48db-8dea-fd4426c74e49" />
 
