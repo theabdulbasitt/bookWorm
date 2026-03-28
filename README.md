@@ -70,7 +70,6 @@ eas build --platform android --profile production
 
 ---
 
-*This project was developed as a showcase of Full-Stack Mobile Development capabilities using the React Native ecosystem.*
 
 
 
