@@ -14,9 +14,9 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json()); // midlleware use to parse the json data from the request body
 app.use(cors());
 
-app.use("/api/auth", authRoutes);
-app.use("/api/books", bookRoutes);
-app.use("/api/users", userRoutes);
+app.use("/auth", authRoutes);
+app.use("/books", bookRoutes);
+app.use("/users", userRoutes);
 
 
 app.listen(PORT, () => {
